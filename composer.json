@@ -1,5 +1,5 @@
 {
-	"name" : "ekmungai/eloquent-ifrs",
+	"name" : "fared123/eloquent-ifrs",
 	"description" : "Eloquent Double Entry Accounting with focus on IFRS Compliant Reporting",
 	"keywords" : [
 		"accounting",
@@ -11,8 +11,8 @@
 	"type" : "library",
 	"license" : "MIT",
 	"support" : {
-		"issues" : "https://github.com/ekmungai/eloquent-ifrs/issues",
-		"source" : "https://github.com/ekmungai/eloquent-ifrs"
+		"issues" : "https://github.com/fared123/eloquent-ifrs/issues",
+		"source" : "https://github.com/fared123/eloquent-ifrs"
 	},
 	"authors" : [{
 			"name" : "Edward Mungai",
