@@ -183,22 +183,28 @@ class Account extends Model implements Recyclable, Segregatable
     public static function sectionBalances(
         array $accountTypes,
         $startDate = null,
-        $endDate = null
+        $endDate = null,
+        $fullBalance = true
     ): array {
         $balances = ['sectionOpeningBalance' => 0, 'sectionClosingBalance' => 0, 'sectionMovement' => 0, 'sectionCategories' => []];
 
-        $startDate = is_null($startDate) ? ReportingPeriod::periodStart($endDate) : Carbon::parse($startDate);
-        $endDate = is_null($endDate) ? Carbon::now() : Carbon::parse($endDate);
+        //$startDate = is_null($startDate) ? ReportingPeriod::periodStart($endDate) : Carbon::parse($startDate);
+        //$endDate = is_null($endDate) ? Carbon::now() : Carbon::parse($endDate);
+        $startDate = is_null($startDate) ? ReportingPeriod::periodStart($endDate) : $startDate;
+        $endDate = is_null($endDate) ? Carbon::now() : $endDate;
+        
         $periodStart = ReportingPeriod::periodStart($endDate);
 
         $year = ReportingPeriod::year($endDate);
 
         foreach (Account::whereIn('account_type', $accountTypes)->get() as $account) {
 
-            $account->openingBalance = $account->openingBalance($year) + Ledger::balance($account, $periodStart, $startDate);
+            //$account->openingBalance = $account->openingBalance($year) + Ledger::balance($account, $periodStart, $startDate);
+            $account->openingBalance = $account->openingBalance($year) + $account->currentBalance($periodStart, $startDate);
             $account->balanceMovement = $account->currentBalance($startDate, $endDate);
-
-            $account->closingBalance = $account->openingBalance + $account->balanceMovement;
+            
+            //$account->closingBalance = $account->openingBalance + $account->balanceMovement;
+            $account->closingBalance = $fullBalance ? $account->openingBalance + $account->balanceMovement : $account->balanceMovement;
 
             if(in_array("BANK",$accountTypes)){
                 //echo 1;
@@ -305,7 +311,8 @@ class Account extends Model implements Recyclable, Segregatable
     public function openingBalance(int $year = null): float
     {
         if (!is_null($year)) {
-            $period = ReportingPeriod::where('calendar_year', $year)->first();
+            //$period = ReportingPeriod::where('calendar_year', $year)->first();
+            $period = ReportingPeriod::getPeriod($year."-01-01");
         } else {
             $period = Auth::user()->entity->current_reporting_period;
         }
@@ -322,16 +329,19 @@ class Account extends Model implements Recyclable, Segregatable
     /**
      * Get Account's Current Balance for the Period given.
      *
-     * @param string $startDate
-     * @param string $endDate
+     * @param Carbon $startDate
+     * @param Carbon $endDate
      *
      * @return float
      */
-    public function currentBalance(string $startDate = null, string $endDate = null): float
+    //public function currentBalance(string $startDate = null, string $endDate = null): float
+    public function currentBalance(Carbon $startDate = null, Carbon $endDate = null): float
     {
 
-        $startDate = is_null($startDate) ? ReportingPeriod::periodStart($endDate) : Carbon::parse($startDate);
-        $endDate = is_null($endDate) ? Carbon::now() : Carbon::parse($endDate);
+        //$startDate = is_null($startDate) ? ReportingPeriod::periodStart($endDate) : Carbon::parse($startDate);
+        //$endDate = is_null($endDate) ? Carbon::now() : Carbon::parse($endDate);
+        $startDate = is_null($startDate) ? ReportingPeriod::periodStart($endDate) : $startDate;
+        $endDate = is_null($endDate) ? Carbon::now() : $endDate;
         return Ledger::balance($this, $startDate, $endDate);
     }
 
@@ -344,7 +354,8 @@ class Account extends Model implements Recyclable, Segregatable
      */
     public function closingBalance(string $endDate = null): float
     {
-        $endDate = is_null($endDate) ? Carbon::now() : $endDate;
+        //$endDate = is_null($endDate) ? Carbon::now() : $endDate;
+        $endDate = is_null($endDate) ? ReportingPeriod::periodEnd() : Carbon::parse($endDate);
         $startDate = ReportingPeriod::periodStart($endDate);
         $year = ReportingPeriod::year($endDate);
 
@@ -371,7 +382,8 @@ class Account extends Model implements Recyclable, Segregatable
             ->where($transactionTable . '.deleted_at', null)
             ->where($transactionTable . '.entity_id', $this->entity_id)
             ->where($transactionTable . '.transaction_date', '>=', $startDate)
-            ->where($transactionTable . '.transaction_date', '<=', $endDate)
+            //->where($transactionTable . '.transaction_date', '<=', $endDate)
+            ->where($transactionTable . '.transaction_date', '<=', $endDate->endOfDay()
             ->where($transactionTable . '.currency_id', $this->currency_id)
             ->select(
                 $transactionTable . '.id',

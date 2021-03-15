@@ -78,7 +78,9 @@ class CashFlowStatement extends FinancialStatement
     {
         $this->period['startDate'] = is_null($startDate) ? ReportingPeriod::periodStart() : Carbon::parse($startDate);
         $this->period['endDate'] = is_null($endDate) ? Carbon::now() : Carbon::parse($endDate);
-        $this->period['endDate']->addDay();
+        if($this->period['endDate'] != ReportingPeriod::periodEnd($endDate)){
+            $this->period['endDate']->addDay();
+        }
 
         $period = ReportingPeriod::where("calendar_year", $endDate)->first();
         parent::__construct($period);
@@ -117,7 +119,8 @@ class CashFlowStatement extends FinancialStatement
     /**
      * Get Cash Flow Statement Sections and Results.
      */
-    public function getSections(): void
+    //public function getSections(): void
+    public function getSections($startDate = null, $endDate = null, $fullbalance = true): void
     {
         // Accounts movements for the Period
         foreach (array_keys($this->balances) as $section) {
