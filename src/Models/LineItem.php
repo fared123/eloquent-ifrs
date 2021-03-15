@@ -64,6 +64,7 @@ class LineItem extends Model implements Recyclable, Segregatable
         'narration',
         'amount',
         'quantity',
+        'vat_inclusive',
         'destroyed_at',
         'deleted_at',
         'created_at',

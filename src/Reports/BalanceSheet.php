@@ -71,9 +71,12 @@ class BalanceSheet extends FinancialStatement
      */
     public function __construct(string $endDate = null)
     {
-        $this->period['endDate'] = is_null($endDate) ? Carbon::now() : Carbon::parse($endDate);
+        //$this->period['endDate'] = is_null($endDate) ? Carbon::now() : Carbon::parse($endDate);
+        $this->period['startDate'] = ReportingPeriod::periodStart($endDate);
+        $this->period['endDate'] = is_null($endDate) ? ReportingPeriod::periodEnd() : Carbon::parse($endDate);
+        //$period = ReportingPeriod::where("calendar_year", $endDate)->first();
 
-        $period = ReportingPeriod::where("calendar_year", $endDate)->first();
+        $period = ReportingPeriod::getPeriod($this->period['endDate']);
         parent::__construct($period);
 
         // Section Accounts
@@ -112,20 +115,24 @@ class BalanceSheet extends FinancialStatement
     /**
      * Get Balance Sheet Sections.
      */
-    public function getSections(): void
+    //public function getSections(): void
+    public function getSections($startDate = null, $endDate = null, $fullbalance = true): void
     {
-        parent::getSections();
+        parent::getSections($this->period['startDate'], $this->period['endDate']);
+        //parent::getSections();
 
         // Net Assets   
         $this->results[self::NET_ASSETS] = $this->totals[self::ASSETS] + ($this->totals[self::LIABILITIES] + $this->totals[self::RECONCILIATION]);
 
         // Net Profit
         $netProfit = Account::sectionBalances(
-            IncomeStatement::getAccountTypes()
+            IncomeStatement::getAccountTypes(),
+            $this->period['startDate'], 
+            $this->period['endDate']
         )["sectionClosingBalance"];
 
         $this->balances[self::EQUITY][self::NET_PROFIT] = $netProfit;
-        $this->accounts[self::EQUITY][self::EQUITY][config('ifrs')['statements'][self::NET_PROFIT]] = [
+        $this->accounts[self::EQUITY][self::NET_PROFIT][config('ifrs')['statements'][self::NET_PROFIT]] = [
             "accounts" => null,
             "total" => $netProfit,
             "id" => 0
