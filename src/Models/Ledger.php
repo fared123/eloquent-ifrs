@@ -77,7 +77,7 @@ class Ledger extends Model implements Segregatable
      */
     private static function postVat(LineItem $lineItem, Transaction $transaction): void
     {
-        dd($lineItem);
+        
         if($lineItem->vat_inclusive === 'true'){
             $amount = $lineItem->amount - ($lineItem->amount / (1 + ($lineItem->vat->rate / 100)));
         }
