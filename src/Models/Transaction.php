@@ -424,11 +424,14 @@ class Transaction extends Model implements Segregatable, Recyclable, Clearable, 
         } else {
             foreach ($this->getLineItems() as $lineItem) {
                 $amount += $lineItem->amount * $lineItem->quantity;
-                if (!$lineItem->vat_inclusive) {
+                if ($lineItem->vat_inclusive == 'false') {
+                    $amount += $lineItem->amount * ($lineItem->vat->rate / 100) * $lineItem->quantity;
+                }
+                if ($lineItem->vat_inclusive == 'margin') {
                     if(isset($lineItem->vehicle_vat)){
-                        $amount = $lineItem->vehicle_vat;
+                        $amount += $lineItem->vehicle_vat;
                     }else{
-                        $amount += $lineItem->amount * ($lineItem->vat->rate / 100) * $lineItem->quantity;
+                        $amount += 0;
                     }
                 }
             }
