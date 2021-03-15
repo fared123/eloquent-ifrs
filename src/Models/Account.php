@@ -383,7 +383,7 @@ class Account extends Model implements Recyclable, Segregatable
             ->where($transactionTable . '.entity_id', $this->entity_id)
             ->where($transactionTable . '.transaction_date', '>=', $startDate)
             //->where($transactionTable . '.transaction_date', '<=', $endDate)
-            ->where($transactionTable . '.transaction_date', '<=', $endDate->endOfDay()
+            ->where($transactionTable . '.transaction_date', '<=', $endDate->endOfDay())
             ->where($transactionTable . '.currency_id', $this->currency_id)
             ->select(
                 $transactionTable . '.id',
@@ -396,7 +396,7 @@ class Account extends Model implements Recyclable, Segregatable
                 $transactionTable . '.order_type',
                 $transactionTable . '.order_no',
                 $transactionTable . '.due_date',
-                $transactionTable . '.customer_id'
+                $transactionTable . '.customer_id',
             )->distinct();
 
         $query->where(
