@@ -437,12 +437,13 @@ class Transaction extends Model implements Segregatable, Recyclable, Clearable, 
                     }
                 }
             }
+            return Response::json([
+                'status' => 'success',
+                'amount' => $amount,
+                'st' => $lineItem->vat_inclusive
+            ], 200);
         }
-        return Response::json([
-            'status' => 'success',
-            'amount' => $amount,
-            'st' => $lineItem->vat_inclusive
-        ], 200);
+        
         return $amount;
     }
 
