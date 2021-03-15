@@ -216,22 +216,8 @@ class Entity extends Model implements Recyclable
         //return $this->currency; // is_null($this->parent) ? $this->currency : $this->parent->currency;
     }
 
-    /**
-     * Validate Entity.
-     */
-    public function save(array $options = []): bool
-    {
-        if(is_null($this->locale)){
-            $this->locale = config('ifrs.locales')[0];
-        }else{
-            if(!in_array($this->locale, config('ifrs.locales'))){
-                throw new UnconfiguredLocale($this->locale);
-            }
-        }
-
-        return parent::save();
-    }
     
+
     /**
      * Format the given amount and currency according to the given locale.
      *
@@ -272,4 +258,5 @@ class Entity extends Model implements Recyclable
         }
         return parent::save();
     }
+
 }
