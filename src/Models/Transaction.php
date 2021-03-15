@@ -422,6 +422,7 @@ class Transaction extends Model implements Segregatable, Recyclable, Clearable, 
                 $amount += $ledger->amount / $this->exchangeRate->rate;
             }
         } else {
+            
             foreach ($this->getLineItems() as $lineItem) {
                 $amount += $lineItem->amount * $lineItem->quantity;
                 if ($lineItem->vat_inclusive == 'false') {
