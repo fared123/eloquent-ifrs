@@ -311,8 +311,8 @@ class Account extends Model implements Recyclable, Segregatable
     public function openingBalance(int $year = null): float
     {
         if (!is_null($year)) {
-            //$period = ReportingPeriod::where('calendar_year', $year)->first();
-            $period = ReportingPeriod::getPeriod($year."-01-01");
+            $period = ReportingPeriod::where('calendar_year', $year)->first();
+            //$period = ReportingPeriod::getPeriod($year."-01-01");
         } else {
             $period = Auth::user()->entity->current_reporting_period;
         }
