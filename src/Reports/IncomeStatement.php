@@ -131,7 +131,7 @@ class IncomeStatement extends FinancialStatement
             self::NET_PROFIT => abs($revenues + $otherRevenues + $cogs + $expenses),
         ];
     }
-    
+
     /**
      * Construct Income Statement for the given period.
      *
@@ -180,12 +180,10 @@ class IncomeStatement extends FinancialStatement
         return array_merge($this->period, parent::attributes());
     }
 
-    /**
-     * Get Cash Flow Statement Sections and Results.
-     */
-    public function getSections(): void
+    public function getSections($startDate = null, $endDate = null, $fullbalance = true): void
     {
-        parent::getSections();
+        
+        parent::getSections($this->period['startDate'], $this->period['endDate'], false);
 
         // Gross Profit
         $this->results[self::GROSS_PROFIT] = ($this->totals[self::OPERATING_REVENUES] + $this->totals[self::OPERATING_EXPENSES]) * -1;
