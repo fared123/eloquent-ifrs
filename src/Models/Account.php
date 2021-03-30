@@ -121,16 +121,7 @@ class Account extends Model implements Recyclable, Segregatable
         'updated_at',
     ];
 
-    public function __construct(){
-
-        parent::__construct();
-        dd(session()->all(), config('database.connections.datadb'), Auth::user());
-        //Config::set('database.connections.datadb.database', 'motogb_dms_mgb');
-
-        //DB::reconnect('datadb');
-        //Schema::connection('datadb')->getConnection()->reconnect();
-        
-    }
+    
 
     /**
      * Get Human Readable Account Type.
