@@ -123,7 +123,7 @@ class Account extends Model implements Recyclable, Segregatable
 
     public function __construct(){
 
-        dd(config('database.connections.datadb.database'));
+        dd($entity, $this->entity_id);
         
         DB::reconnect('datadb');
 
