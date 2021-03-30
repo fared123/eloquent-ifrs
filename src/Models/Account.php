@@ -54,7 +54,7 @@ class Account extends Model implements Recyclable, Segregatable
     protected $connection = 'datadb';
 
     public function __construct(){
-        dd(Session::get('dataconnection'), Config::set('database.connections.datadb'));
+        dd(Session::get('dataconnection'), config('database.connections.datadb'));
         Config::set('database.connections.datadb.database', Session::get('dataconnection'));
 
         DB::reconnect('datadb');
