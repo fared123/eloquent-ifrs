@@ -28,6 +28,9 @@ use IFRS\Exceptions\MissingAccountType;
 use IFRS\Exceptions\HangingTransactions;
 use IFRS\Exceptions\InvalidCategoryType;
 
+use Session;
+use Config;
+
 /**
  * Class Account
  *
@@ -48,6 +51,18 @@ use IFRS\Exceptions\InvalidCategoryType;
  */
 class Account extends Model implements Recyclable, Segregatable
 {
+    protected $connection = 'datadb';
+
+    public function __construct(){
+
+        Config::set('database.connections.datadb.database', Session::get('dataconnection'));
+
+        DB::reconnect('datadb');
+        //Schema::connection('datadb')->getConnection()->reconnect();
+        
+    }
+
+    
     use Segregating;
     use SoftDeletes;
     use Recycling;
