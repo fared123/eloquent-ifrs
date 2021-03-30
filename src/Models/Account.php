@@ -53,9 +53,6 @@ class Account extends Model implements Recyclable, Segregatable
 {
     protected $connection = 'datadb';
 
-    
-
-
     use Segregating;
     use SoftDeletes;
     use Recycling;
@@ -125,14 +122,14 @@ class Account extends Model implements Recyclable, Segregatable
     ];
 
     public function __construct(){
-        dd(session()->get('dataconnection'), config('database.connections.datadb'), $this->entity_id, Auth::user());
-        Config::set('database.connections.datadb.database', Session::get('dataconnection'));
+        //dd(session()->get('dataconnection'), config('database.connections.datadb'), $this->entity_id, Auth::user());
+        Config::set('database.connections.datadb.database', 'motogb_dms_mgb');
 
         DB::reconnect('datadb');
         //Schema::connection('datadb')->getConnection()->reconnect();
         
     }
-    
+
     /**
      * Get Human Readable Account Type.
      *
