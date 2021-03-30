@@ -54,7 +54,7 @@ class Account extends Model implements Recyclable, Segregatable
     protected $connection = 'datadb';
 
     public function __construct(){
-
+        dd(Session::get('dataconnection'));
         Config::set('database.connections.datadb.database', Session::get('dataconnection'));
 
         DB::reconnect('datadb');
@@ -62,7 +62,7 @@ class Account extends Model implements Recyclable, Segregatable
         
     }
 
-    
+
     use Segregating;
     use SoftDeletes;
     use Recycling;
