@@ -123,7 +123,7 @@ class Account extends Model implements Recyclable, Segregatable
 
     public function __construct(){
 
-        dd(session()->all(), config('database.connections.datadb'), Auth::user());
+        //dd(session()->all(), config('database.connections.datadb'), Auth::user());
         //Config::set('database.connections.datadb.database', 'motogb_dms_mgb');
 
         //DB::reconnect('datadb');

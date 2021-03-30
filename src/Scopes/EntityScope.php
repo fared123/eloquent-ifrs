@@ -28,6 +28,7 @@ class EntityScope implements Scope
     {
         $model = null;
         $user = Auth::user();
+        dd(session()->all(), config('database.connections.datadb'), Auth::user());
         if (!is_null($user)) {
             if(!$user->admin_mode){
                 $builder->where('entity_id', Auth::user()->entity_id);
