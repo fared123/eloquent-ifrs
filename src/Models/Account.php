@@ -123,8 +123,8 @@ class Account extends Model implements Recyclable, Segregatable
 
     public function __construct(){
 
-        config('database.connections.datadb.database');
-
+        dd(config('database.connections.datadb.database'));
+        
         DB::reconnect('datadb');
 
         //dd(session()->get('dataconnection'), config('database.connections.datadb'), $this->entity_id, Auth::user());
