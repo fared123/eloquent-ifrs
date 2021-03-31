@@ -50,7 +50,7 @@ use IFRS\Exceptions\InvalidCategoryType;
 class Account extends Model implements Recyclable, Segregatable
 {
     
-    protected $connection = 'datadb';
+    
 
     use Segregating;
     use SoftDeletes;
@@ -97,6 +97,8 @@ class Account extends Model implements Recyclable, Segregatable
         Account::CURRENT_ASSET,
         Account::INVENTORY
     ];
+
+    protected $connection = 'datadb';
 
     /**
      * The attributes that are mass assignable.
