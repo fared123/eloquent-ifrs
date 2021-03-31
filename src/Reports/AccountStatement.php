@@ -92,6 +92,7 @@ class AccountStatement
     /**
      * Construct Account Statement for the account for the period.
      *
+     * @param string $connection
      * @param int    $accountId
      * @param int    $currencyId
      * @param string $startDate
