@@ -373,17 +373,18 @@ class Account extends Model implements Recyclable, Segregatable
     /**
      * Account Transactions Query
      *
+     * @param string $connection
      * @param Carbon $startDate
      * @param Carbon $endDate
      *
      * @return Builder
      */
-    public function transactionsQuery(Carbon $startDate, Carbon $endDate)
+    public function transactionsQuery(string $connection, Carbon $startDate, Carbon $endDate)
     {
         $transactionTable = config('ifrs.table_prefix') . 'transactions';
         $ledgerTable = config('ifrs.table_prefix') . 'ledgers';
 
-        $query = DB::table(
+        $query = DB::connection($connection)->table(
             $transactionTable
         )
             ->leftJoin($ledgerTable, $transactionTable . '.id', '=', $ledgerTable . '.transaction_id')
@@ -404,7 +405,7 @@ class Account extends Model implements Recyclable, Segregatable
                 $transactionTable . '.order_type',
                 $transactionTable . '.order_no',
                 $transactionTable . '.due_date',
-                $transactionTable . '.customer_id',
+                $transactionTable . '.customer_id'
             )->distinct();
 
         $query->where(

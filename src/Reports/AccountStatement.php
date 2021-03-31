@@ -127,7 +127,7 @@ class AccountStatement
      */
     public function getTransactions(): void
     {
-        $query = $this->account->transactionsQuery($this->period['startDate'], $this->period['endDate']);
+        $query = $this->account->transactionsQuery($this->connection, $this->period['startDate'], $this->period['endDate']);
         $this->balances['opening'] = $this->account->openingBalance(ReportingPeriod::year($this->period['startDate']));
         $this->balances['closing'] += $this->balances['opening'];
 
