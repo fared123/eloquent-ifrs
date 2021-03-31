@@ -36,6 +36,8 @@ class AccountSchedule extends AccountStatement
         "totalAge" => 0,
     ];
 
+    public $connection;
+
     /**
      * Get Transaction amounts.
      *
@@ -51,7 +53,7 @@ class AccountSchedule extends AccountStatement
         if ($unclearedAmount > 0) {
 
             if ($transaction instanceof Balance) {
-                $transaction->transactionType = Transaction::on($connection)->getType($transaction->transaction_type);
+                $transaction->transactionType = Transaction::on($this->connection)->getType($transaction->transaction_type);
             } else {
                 $transaction->transactionType = $transaction->type;
             }
@@ -88,6 +90,8 @@ class AccountSchedule extends AccountStatement
 
         $accountTypes = [Account::RECEIVABLE, Account::PAYABLE];
 
+        $this->connection = $connection;
+
         if (!in_array(Account::on($connection)->find($accountId)->account_type, $accountTypes)) {
             throw new InvalidAccountType($accountTypes);
         }
@@ -117,7 +121,7 @@ class AccountSchedule extends AccountStatement
         )->select(config('ifrs.table_prefix') . 'transactions.id');
 
         foreach ($transactions->get() as $transaction) {
-            $transaction = Transaction::on($connection)->find($transaction->id);
+            $transaction = Transaction::on($this->connection)->find($transaction->id);
 
             if (
                 $transaction->transaction_type == Transaction::JN
