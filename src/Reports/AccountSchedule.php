@@ -51,7 +51,7 @@ class AccountSchedule extends AccountStatement
         if ($unclearedAmount > 0) {
 
             if ($transaction instanceof Balance) {
-                $transaction->transactionType = Transaction::getType($transaction->transaction_type);
+                $transaction->transactionType = Transaction::on($connection)->getType($transaction->transaction_type);
             } else {
                 $transaction->transactionType = $transaction->type;
             }
@@ -117,7 +117,7 @@ class AccountSchedule extends AccountStatement
         )->select(config('ifrs.table_prefix') . 'transactions.id');
 
         foreach ($transactions->get() as $transaction) {
-            $transaction = Transaction::find($transaction->id);
+            $transaction = Transaction::on($connection)->find($transaction->id);
 
             if (
                 $transaction->transaction_type == Transaction::JN
