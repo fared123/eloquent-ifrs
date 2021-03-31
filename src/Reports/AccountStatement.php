@@ -72,7 +72,7 @@ class AccountStatement
      */
     public $transactions = [];
 
-    public $connection;
+    
 
     /**
      * Print Account Statement attributes.
@@ -94,25 +94,23 @@ class AccountStatement
     /**
      * Construct Account Statement for the account for the period.
      *
-     * @param string $connection
      * @param int    $accountId
      * @param int    $currencyId
      * @param string $startDate
      * @param string $endDate
      */
     public function __construct(
-        string $connection,
         int $accountId = null,
         int $currencyId = null,
         string $startDate = null,
         string $endDate = null
     ) {
 
-        $this->connection = $connection;
+        
         if (is_null($accountId)) {
             throw new MissingAccount("Account Statement");
         } else {
-            $this->account = Account::on($connection)->find($accountId);
+            $this->account = Account::find($accountId);
         }
 
         $this->entity = Auth::user()->entity;
@@ -127,7 +125,7 @@ class AccountStatement
      */
     public function getTransactions(): void
     {
-        $query = $this->account->transactionsQuery($this->connection, $this->period['startDate'], $this->period['endDate']);
+        $query = $this->account->transactionsQuery($this->period['startDate'], $this->period['endDate']);
         $this->balances['opening'] = $this->account->openingBalance(ReportingPeriod::year($this->period['startDate']));
         $this->balances['closing'] += $this->balances['opening'];
 
@@ -136,7 +134,7 @@ class AccountStatement
         foreach ($query->get() as $transaction) {
             $transaction->debit = $transaction->credit = 0;
 
-            $contribution = Ledger::contribution($this->connection, $this->account, $transaction->id);
+            $contribution = Ledger::contribution($this->account, $transaction->id);
             $this->balances['closing'] += $contribution;
             $balance += $contribution;
             $transaction->balance = $balance;

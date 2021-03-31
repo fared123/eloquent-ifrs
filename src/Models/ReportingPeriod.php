@@ -39,6 +39,8 @@ use IFRS\Exceptions\MissingReportingPeriod;
  */
 class ReportingPeriod extends Model implements Segregatable, Recyclable
 {
+    protected $connection = 'datadb';
+    
     use Segregating;
     use SoftDeletes;
     use Recycling;

@@ -33,6 +33,8 @@ use Illuminate\Support\Facades\Auth;
  */
 class Currency extends Model implements Recyclable, Segregatable
 {
+    protected $connection = 'datadb';
+    
     use Segregating;
     use SoftDeletes;
     use Recycling;

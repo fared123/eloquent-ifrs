@@ -28,8 +28,6 @@ use IFRS\Exceptions\MissingAccountType;
 use IFRS\Exceptions\HangingTransactions;
 use IFRS\Exceptions\InvalidCategoryType;
 
-use Session;
-use Config;
 
 /**
  * Class Account
@@ -52,7 +50,7 @@ use Config;
 class Account extends Model implements Recyclable, Segregatable
 {
     
-    
+    protected $connection = 'datadb';
 
     use Segregating;
     use SoftDeletes;
@@ -373,18 +371,17 @@ class Account extends Model implements Recyclable, Segregatable
     /**
      * Account Transactions Query
      *
-     * @param string $connection
      * @param Carbon $startDate
      * @param Carbon $endDate
      *
      * @return Builder
      */
-    public function transactionsQuery(string $connection, Carbon $startDate, Carbon $endDate)
+    public function transactionsQuery(Carbon $startDate, Carbon $endDate)
     {
         $transactionTable = config('ifrs.table_prefix') . 'transactions';
         $ledgerTable = config('ifrs.table_prefix') . 'ledgers';
 
-        $query = DB::connection($connection)->table(
+        $query = DB::table(
             $transactionTable
         )
             ->leftJoin($ledgerTable, $transactionTable . '.id', '=', $ledgerTable . '.transaction_id')

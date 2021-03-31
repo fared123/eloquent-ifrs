@@ -35,6 +35,8 @@ use IFRS\Traits\ModelTablePrefix;
  */
 class Category extends Model implements Segregatable, Recyclable
 {
+    protected $connection = 'datadb';
+    
     use Segregating;
     use SoftDeletes;
     use Recycling;

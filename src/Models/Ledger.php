@@ -39,6 +39,8 @@ use IFRS\Traits\ModelTablePrefix;
  */
 class Ledger extends Model implements Segregatable
 {
+    protected $connection = 'datadb';
+
     use Segregating;
     use SoftDeletes;
     use ModelTablePrefix;
@@ -248,21 +250,20 @@ class Ledger extends Model implements Segregatable
     /**
      * Get Account's contribution to the Transaction total amount.
      *
-     * @param string $connection
      * @param Account $account
      * @param int     $transactionId
      *
      * @return float
      */
-    public static function contribution(string $connection, Account $account, int $transactionId): float
+    public static function contribution(Account $account, int $transactionId): float
     {
-        $debits = Ledger::on($connection)->where([
+        $debits = Ledger::where([
             "post_account" => $account->id,
             "entry_type" => Balance::DEBIT,
             "transaction_id" => $transactionId,
         ])->sum('amount');
 
-        $credits = Ledger::on($connection)->where([
+        $credits = Ledger::where([
             "post_account" => $account->id,
             "entry_type" => Balance::CREDIT,
             "transaction_id" => $transactionId,

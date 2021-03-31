@@ -36,7 +36,7 @@ class AccountSchedule extends AccountStatement
         "totalAge" => 0,
     ];
 
-    public $connection;
+    
 
     /**
      * Get Transaction amounts.
@@ -53,7 +53,7 @@ class AccountSchedule extends AccountStatement
         if ($unclearedAmount > 0) {
 
             if ($transaction instanceof Balance) {
-                $transaction->transactionType = Transaction::on($this->connection)->getType($transaction->transaction_type);
+                $transaction->transactionType = Transaction::getType($transaction->transaction_type);
             } else {
                 $transaction->transactionType = $transaction->type;
             }
@@ -77,12 +77,11 @@ class AccountSchedule extends AccountStatement
     /**
      * Account Schedule for the account for the period.
      *
-     * @param string $connection
      * @param int    $accountId
      * @param int    $currencyId
      * @param string $endDate
      */
-    public function __construct($connection, int $accountId = null, int $currencyId = null, string $endDate = null)
+    public function __construct(int $accountId = null, int $currencyId = null, string $endDate = null)
     {
         if (is_null($accountId)) {
             throw new MissingAccount("Account Schedule");
@@ -90,12 +89,12 @@ class AccountSchedule extends AccountStatement
 
         $accountTypes = [Account::RECEIVABLE, Account::PAYABLE];
 
-        $this->connection = $connection;
+        
 
-        if (!in_array(Account::on($connection)->find($accountId)->account_type, $accountTypes)) {
+        if (!in_array(Account::find($accountId)->account_type, $accountTypes)) {
             throw new InvalidAccountType($accountTypes);
         }
-        parent::__construct($connection, $accountId, $currencyId, null, $endDate);
+        parent::__construct($accountId, $currencyId, null, $endDate);
     }
 
     /**
@@ -113,7 +112,6 @@ class AccountSchedule extends AccountStatement
 
         // Clearable Transactions
         $transactions = $this->account->transactionsQuery(
-            $this->connection,
             $this->period['startDate'],
             $this->period['endDate']
         )->whereIn(
@@ -122,7 +120,7 @@ class AccountSchedule extends AccountStatement
         )->select(config('ifrs.table_prefix') . 'transactions.id');
 
         foreach ($transactions->get() as $transaction) {
-            $transaction = Transaction::on($this->connection)->find($transaction->id);
+            $transaction = Transaction::find($transaction->id);
 
             if (
                 $transaction->transaction_type == Transaction::JN
