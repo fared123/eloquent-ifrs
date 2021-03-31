@@ -113,6 +113,7 @@ class AccountSchedule extends AccountStatement
 
         // Clearable Transactions
         $transactions = $this->account->transactionsQuery(
+            $this->connection,
             $this->period['startDate'],
             $this->period['endDate']
         )->whereIn(
