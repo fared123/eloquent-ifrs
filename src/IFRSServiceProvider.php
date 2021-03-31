@@ -11,6 +11,7 @@
 namespace IFRS;
 
 use Illuminate\Support\ServiceProvider;
+use Auth;
 
 class IFRSServiceProvider extends ServiceProvider
 {
@@ -37,5 +38,7 @@ class IFRSServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadFactoriesFrom(__DIR__ . '/../database/factories');
+
+        dd(Auth::user());
     }
 }

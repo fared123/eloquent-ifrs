@@ -122,13 +122,7 @@ class Account extends Model implements Recyclable, Segregatable
         'updated_at',
     ];
 
-    public function __construct($attributes = [])
-    {
-        $entity = Auth::user()->entity;
-
-        dd($entity);
-
-    }
+    
 
     /**
      * Get Human Readable Account Type.
