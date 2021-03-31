@@ -125,6 +125,7 @@ class Transaction extends Model implements Segregatable, Recyclable, Clearable, 
     public function __construct($attributes = [])
     {
         $entity = Auth::user()->entity;
+        dd($entity);
         $this->table = config('ifrs.table_prefix') . 'transactions';
 
         if (!isset($attributes['currency_id']) && !is_null($entity)) {

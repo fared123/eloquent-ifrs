@@ -240,9 +240,7 @@ class Entity extends Model implements Recyclable
         return $format->formatCurrency($amount, $currencyCode);
     }
 
-    public function sites(){
-        return $this->hasMany('App\Site');
-    }
+    
 
     /**
      * Validate Entity.
