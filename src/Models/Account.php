@@ -52,7 +52,7 @@ use Config;
 class Account extends Model implements Recyclable, Segregatable
 {
     
-    protected $connection = 'datadb';
+    protected $connection = session('dataconnection');
 
     use Segregating;
     use SoftDeletes;
