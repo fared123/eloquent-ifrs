@@ -72,6 +72,8 @@ class AccountStatement
      */
     public $transactions = [];
 
+    public $connection;
+
     /**
      * Print Account Statement attributes.
      *
@@ -105,6 +107,8 @@ class AccountStatement
         string $startDate = null,
         string $endDate = null
     ) {
+
+        $this->connection = $connection;
         if (is_null($accountId)) {
             throw new MissingAccount("Account Statement");
         } else {
@@ -132,7 +136,7 @@ class AccountStatement
         foreach ($query->get() as $transaction) {
             $transaction->debit = $transaction->credit = 0;
 
-            $contribution = Ledger::on($connection)->contribution($this->account, $transaction->id);
+            $contribution = Ledger::on($this->connection)->contribution($this->account, $transaction->id);
             $this->balances['closing'] += $contribution;
             $balance += $contribution;
             $transaction->balance = $balance;
