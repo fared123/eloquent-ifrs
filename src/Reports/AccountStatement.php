@@ -136,7 +136,7 @@ class AccountStatement
         foreach ($query->get() as $transaction) {
             $transaction->debit = $transaction->credit = 0;
 
-            $contribution = Ledger::on($this->connection)->contribution($this->account, $transaction->id);
+            $contribution = Ledger::contribution($this->connection, $this->account, $transaction->id);
             $this->balances['closing'] += $contribution;
             $balance += $contribution;
             $transaction->balance = $balance;
