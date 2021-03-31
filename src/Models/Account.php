@@ -52,6 +52,7 @@ use Config;
 class Account extends Model implements Recyclable, Segregatable
 {
     
+    protected $connection = 'datadb';
 
     use Segregating;
     use SoftDeletes;
