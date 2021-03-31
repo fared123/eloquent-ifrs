@@ -98,6 +98,7 @@ class AccountStatement
      * @param string $endDate
      */
     public function __construct(
+        string $connection,
         int $accountId = null,
         int $currencyId = null,
         string $startDate = null,
@@ -106,7 +107,7 @@ class AccountStatement
         if (is_null($accountId)) {
             throw new MissingAccount("Account Statement");
         } else {
-            $this->account = Account::find($accountId);
+            $this->account = Account::on($connection)->find($accountId);
         }
 
         $this->entity = Auth::user()->entity;
