@@ -75,11 +75,12 @@ class AccountSchedule extends AccountStatement
     /**
      * Account Schedule for the account for the period.
      *
+     * @param string $connection
      * @param int    $accountId
      * @param int    $currencyId
      * @param string $endDate
      */
-    public function __construct(int $accountId = null, int $currencyId = null, string $endDate = null)
+    public function __construct($connection, int $accountId = null, int $currencyId = null, string $endDate = null)
     {
         if (is_null($accountId)) {
             throw new MissingAccount("Account Schedule");
@@ -87,10 +88,10 @@ class AccountSchedule extends AccountStatement
 
         $accountTypes = [Account::RECEIVABLE, Account::PAYABLE];
 
-        if (!in_array(Account::find($accountId)->account_type, $accountTypes)) {
+        if (!in_array(Account::on($connection)->find($accountId)->account_type, $accountTypes)) {
             throw new InvalidAccountType($accountTypes);
         }
-        parent::__construct($accountId, $currencyId, null, $endDate);
+        parent::__construct($connection, $accountId, $currencyId, null, $endDate);
     }
 
     /**
