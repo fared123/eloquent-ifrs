@@ -11,7 +11,8 @@
 namespace IFRS;
 
 use Illuminate\Support\ServiceProvider;
-use Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class IFRSServiceProvider extends ServiceProvider
 {
