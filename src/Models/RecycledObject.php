@@ -32,8 +32,8 @@ use IFRS\Traits\ModelTablePrefix;
 
 class RecycledObject extends Model implements Segregatable
 {
-    protected $connection = 'datadb';
-    
+    protected $connection = 'ifrs_dms';
+
     use Segregating;
     use SoftDeletes;
     use ModelTablePrefix;

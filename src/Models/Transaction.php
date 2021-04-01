@@ -56,8 +56,8 @@ use IFRS\Exceptions\AdjustingReportingPeriod;
  */
 class Transaction extends Model implements Segregatable, Recyclable, Clearable, Assignable
 {
-    protected $connection = 'datadb';
-    
+    protected $connection = 'ifrs_dms';
+
     use Segregating;
     use SoftDeletes;
     use Recycling;

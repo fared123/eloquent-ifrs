@@ -50,8 +50,8 @@ use IFRS\Exceptions\InvalidClearanceCurrency;
  */
 class Assignment extends Model implements Segregatable
 {
-    protected $connection = 'datadb';
-    
+    protected $connection = 'ifrs_dms';
+
     use Segregating;
     use SoftDeletes;
     use ModelTablePrefix;

@@ -37,8 +37,8 @@ use Illuminate\Support\Facades\Auth;
  */
 class Entity extends Model implements Recyclable
 {
-    protected $connection = 'datadb';
-    
+    protected $connection = 'ifrs_dms';
+
     use SoftDeletes;
     use Recycling;
     use ModelTablePrefix;

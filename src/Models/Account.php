@@ -98,7 +98,7 @@ class Account extends Model implements Recyclable, Segregatable
         Account::INVENTORY
     ];
 
-    protected $connection = 'datadb';
+    protected $connection = 'ifrs_dms';
 
     /**
      * The attributes that are mass assignable.

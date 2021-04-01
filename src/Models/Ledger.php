@@ -39,7 +39,7 @@ use IFRS\Traits\ModelTablePrefix;
  */
 class Ledger extends Model implements Segregatable
 {
-    protected $connection = 'datadb';
+    protected $connection = 'ifrs_dms';
 
     use Segregating;
     use SoftDeletes;
