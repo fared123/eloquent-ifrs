@@ -25,8 +25,8 @@ use IFRS\Exceptions\MissingAccount;
 class AccountStatement
 {
 
-    protected $connection = 'datadb';
-    
+    protected $connection = 'ifrs_dms';
+
     /**
      * Account Statement Currency.
      *

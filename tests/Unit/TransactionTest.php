@@ -799,7 +799,7 @@ class TransactionTest extends TestCase
         $this->assertTrue($transaction->has_integrity);
 
         //Change Transaction Ledger amounts
-        DB::connection('datadb')->statement('update ' . config('ifrs.table_prefix') . 'ledgers set amount = 100 where id IN (1,2)');
+        DB::connection('ifrs_dms')->statement('update ' . config('ifrs.table_prefix') . 'ledgers set amount = 100 where id IN (1,2)');
 
         $transaction = Transaction::find($transaction->id);
         // Transaction amount has changed
