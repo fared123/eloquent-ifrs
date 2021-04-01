@@ -383,7 +383,7 @@ class Account extends Model implements Recyclable, Segregatable
         $transactionTable = config('ifrs.table_prefix') . 'transactions';
         $ledgerTable = config('ifrs.table_prefix') . 'ledgers';
 
-        $query = DB::table(
+        $query = DB::connection('datadb')->table(
             $transactionTable
         )
             ->leftJoin($ledgerTable, $transactionTable . '.id', '=', $ledgerTable . '.transaction_id')
