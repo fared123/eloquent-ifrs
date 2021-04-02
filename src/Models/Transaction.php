@@ -95,7 +95,7 @@ class Transaction extends Model implements Segregatable, Recyclable, Clearable, 
      *
      * @var array
      */
-    protected $fillable = ['*'];
+    protected $guarded = [];
 
     /**
      * Construct new Transaction.
