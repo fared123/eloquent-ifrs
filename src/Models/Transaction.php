@@ -95,31 +95,7 @@ class Transaction extends Model implements Segregatable, Recyclable, Clearable, 
      *
      * @var array
      */
-    protected $fillable = [
-    
-        'id',
-        'entity_id',
-        'account_id',
-        'currency_id',
-        'exchange_rate_id',
-        'order_no',
-        'order_type',
-        'order_date',
-        'customer_id',
-        'transaction_date',
-        'due_date',
-        'credit_period',
-        'reference',
-        'transaction_no',
-        'transaction_type',
-        'narration',
-        'document',
-        'credited',
-        'destroyed_at',
-        'deleted_at',
-        'created_at',
-        'updated_at',
-    ];
+    protected $fillable = ['*'];
 
     /**
      * Construct new Transaction.
