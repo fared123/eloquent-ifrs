@@ -53,25 +53,7 @@ class LineItem extends Model implements Recyclable, Segregatable
      *
      * @var array
      */
-    protected $fillable = [
-        
-        'id',
-        'entity_id',
-        'account_id',
-        'vat_account_id',
-        'transaction_id',
-        'vat_id',
-        'order_item_id',
-        'sku',
-        'narration',
-        'amount',
-        'quantity',
-        'vat_inclusive',
-        'destroyed_at',
-        'deleted_at',
-        'created_at',
-        'updated_at',
-    ];
+    protected $guarded = [];
 
     /**
      * Instance Identifier.

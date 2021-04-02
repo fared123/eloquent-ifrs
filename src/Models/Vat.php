@@ -50,20 +50,7 @@ class Vat extends Model implements Segregatable, Recyclable
      *
      * @var array
      */
-    protected $fillable = [
-    
-        'id',
-        'entity_id',
-        'account_id',
-        'code',
-        'name',
-        'rate',
-        'vat',
-        'destroyed_at',
-        'deleted_at',
-        'created_at',
-        'updated_at',
-    ];
+    protected $guarded = [];
 
     /**
      * Instance Identifier.

@@ -87,19 +87,7 @@ class Assignment extends Model implements Segregatable
      *
      * @var array
      */
-    protected $fillable = [
-        
-        'id',
-        'entity_id',
-        'transaction_id',
-        'forex_account_id',
-        'cleared_id',
-        'cleared_type',
-        'amount',
-        'deleted_at',
-        'created_at',
-        'updated_at',
-    ];
+    protected $guarded = [];
 
     /**
      * Bulk assign a transaction to outstanding Transactions, under FIFO (First in first out) methodology

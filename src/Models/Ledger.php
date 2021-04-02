@@ -50,24 +50,7 @@ class Ledger extends Model implements Segregatable
      *
      * @var array
      */
-    protected $fillable = [
-    
-        'id',
-        'entity_id',
-        'transaction_id',
-        'vat_id',
-        'post_account',
-        'folio_account',
-        'line_item_id',
-        'posting_date',
-        'entry_type',
-        'amount',
-        'hash',
-        'destroyed_at',
-        'deleted_at',
-        'created_at',
-        'updated_at',
-    ];
+    protected $guarded = [];
 
     /**
      * Create VAT Ledger entries for the Transaction LineItem.

@@ -81,25 +81,7 @@ class Balance extends Model implements Recyclable, Clearable, Segregatable
      *
      * @var array
      */
-    protected $fillable = [
-        
-        'id',
-        'entity_id',
-        'account_id',
-        'currency_id',
-        'exchange_rate_id',
-        'year',
-        'reference',
-        'transaction_date',
-        'transaction_no',
-        'transaction_type',
-        'balance_type',
-        'amount',
-        'destroyed_at',
-        'deleted_at',
-        'created_at',
-        'updated_at',
-    ];
+    protected $guarded = [];
 
     /**
      * Construct new Balance.

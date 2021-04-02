@@ -47,19 +47,7 @@ class ExchangeRate extends Model implements Segregatable, Recyclable
      *
      * @var array
      */
-    protected $fillable = [
-       
-        'id',
-        'entity_id',
-        'currency_id',
-        'valid_from',
-        'valid_to',
-        'rate',
-        'destroyed_at',
-        'deleted_at',
-        'created_at',
-        'updated_at',
-    ];
+    protected $guarded = [];
 
     /**
      * Instance Identifier.

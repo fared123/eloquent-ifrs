@@ -45,17 +45,7 @@ class Currency extends Model implements Recyclable, Segregatable
      *
      * @var array
      */
-    protected $fillable = [
-        
-        'id',
-        'entity_id',
-        'name',
-        'currency_code',
-        'destroyed_at',
-        'deleted_at',
-        'created_at',
-        'updated_at',
-    ];
+    protected $guarded = [];
 
     /**
      * Instance Identifier.

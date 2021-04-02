@@ -48,23 +48,7 @@ class Entity extends Model implements Recyclable
      *
      * @var array
      */
-    protected $fillable = [
-        
-        'id',
-        'parent_id',
-        'currency_id',
-        'name',
-        'multi_currency',
-        'year_start',
-        'account_code',
-        'destroyed_at',
-        'deleted_at',
-        'created_at',
-        'updated_at',
-        'purchase_order',
-        'sales_order',
-        'locale',
-    ];
+    protected $guarded = [];
 
     /**
      * Entity's Reporting Currency.

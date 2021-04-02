@@ -105,22 +105,7 @@ class Account extends Model implements Recyclable, Segregatable
      *
      * @var array
      */
-    protected $fillable = [
-        'id',
-        'entity_id',
-        'category_id',
-        'currency_id',
-        'client_id',
-        'code',
-        'name',
-        'description',
-        'account_type',
-        'payment',
-        'destroyed_at',
-        'deleted_at',
-        'created_at',
-        'updated_at',
-    ];
+    protected $guarded = [];
 
     
 

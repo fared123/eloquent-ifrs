@@ -61,18 +61,7 @@ class ReportingPeriod extends Model implements Segregatable, Recyclable
      *
      * @var array
      */
-    protected $fillable = [
-
-        'id',
-        'entity_id',
-        'period_count',
-        'status',
-        'calendar_year',
-        'destroyed_at',
-        'deleted_at',
-        'created_at',
-        'updated_at',
-    ];
+    protected $guarded = [];
 
     /**
      * Construct new Account.
