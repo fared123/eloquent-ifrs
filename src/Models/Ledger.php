@@ -20,6 +20,8 @@ use IFRS\Interfaces\Segregatable;
 use IFRS\Traits\Segregating;
 use IFRS\Traits\ModelTablePrefix;
 
+use Illuminate\Support\Facades\Auth;
+
 /**
  * Class Ledger
  *
@@ -86,6 +88,7 @@ class Ledger extends Model implements Segregatable
         $post->post_account = $folio->folio_account = $lineItem->vat_inclusive ? $lineItem->account_id : $transaction->account_id;
         $post->folio_account = $folio->post_account = $lineItem->vat->account_id;
 
+        $post->user_id = $folio->user_id = Auth::id();
 
         $post->save();
         $folio->save();
@@ -124,6 +127,8 @@ class Ledger extends Model implements Segregatable
             $post->post_account = $folio->folio_account = $transaction->account_id;
             $post->folio_account = $folio->post_account = $lineItem->account_id;
 
+            $post->user_id = $folio->user_id = Auth::id();
+            
             $post->save();
             $folio->save();
             $transaction->amount += $lineItem->amount;
