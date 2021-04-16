@@ -34,6 +34,7 @@ use IFRS\Exceptions\UnpostedAssignment;
 use IFRS\Exceptions\RedundantTransaction;
 use IFRS\Exceptions\ClosedReportingPeriod;
 use IFRS\Exceptions\AdjustingReportingPeriod;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class Transaction
@@ -114,7 +115,7 @@ class Transaction extends Model implements Segregatable, Recyclable, Clearable, 
             $attributes['exchange_rate_id'] = $entity->default_rate->id;
         }
         $attributes['transaction_date'] = !isset($attributes['transaction_date']) ? Carbon::now() : Carbon::parse($attributes['transaction_date']);
-
+        $attributes['user_id'] = Auth::id();
         return parent::__construct($attributes);
     }
 
