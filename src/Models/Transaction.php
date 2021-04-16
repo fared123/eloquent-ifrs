@@ -34,7 +34,7 @@ use IFRS\Exceptions\UnpostedAssignment;
 use IFRS\Exceptions\RedundantTransaction;
 use IFRS\Exceptions\ClosedReportingPeriod;
 use IFRS\Exceptions\AdjustingReportingPeriod;
-use Illuminate\Support\Facades\Auth;
+
 
 /**
  * Class Transaction
