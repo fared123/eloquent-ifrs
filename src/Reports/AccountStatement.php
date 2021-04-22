@@ -105,7 +105,7 @@ class AccountStatement
     public function __construct(
         int $accountId = null,
         int $currencyId = null,
-        string $startDate = null,
+        string $startDate = '2013-01-01',
         string $endDate = null
     ) {
 
