@@ -94,7 +94,7 @@ class AccountSchedule extends AccountStatement
         if (!in_array(Account::find($accountId)->account_type, $accountTypes)) {
             throw new InvalidAccountType($accountTypes);
         }
-        parent::__construct($accountId, $currencyId, null, $endDate);
+        parent::__construct($accountId, $currencyId, '2013-01-01', $endDate);
     }
 
     /**

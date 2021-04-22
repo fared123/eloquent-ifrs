@@ -64,7 +64,7 @@ class AccountStatement
      * @var array
      */
     public $period = [
-        "startDate" => null,
+        "startDate" => '2013-01-01',
         "endDate" => null
     ];
 
@@ -105,7 +105,7 @@ class AccountStatement
     public function __construct(
         int $accountId = null,
         int $currencyId = null,
-        string $startDate = '2013-01-01',
+        string $startDate = null,
         string $endDate = null
     ) {
 
