@@ -398,7 +398,7 @@ class Account extends Model implements Recyclable, Segregatable
                 $query->where($ledgerTable . '.post_account', $this->id)
                     ->orwhere($ledgerTable . '.folio_account', $this->id);
             }
-        );
+        )->orderBy('transaction_date');
 
         return $query;
     }
