@@ -333,7 +333,7 @@ class Account extends Model implements Recyclable, Segregatable
 
         //$startDate = is_null($startDate) ? ReportingPeriod::periodStart($endDate) : Carbon::parse($startDate);
         //$endDate = is_null($endDate) ? Carbon::now() : Carbon::parse($endDate);
-        $startDate = is_null($startDate) ? ReportingPeriod::periodStart($endDate) : $startDate;
+        $startDate = is_null($startDate) ? Carbon::parse('2013-01-01') : $startDate;  //ReportingPeriod::periodStart($endDate);
         $endDate = is_null($endDate) ? Carbon::now() : $endDate;
         return Ledger::balance($this, $startDate, $endDate);
     }
@@ -349,7 +349,8 @@ class Account extends Model implements Recyclable, Segregatable
     {
         //$endDate = is_null($endDate) ? Carbon::now() : $endDate;
         $endDate = is_null($endDate) ? ReportingPeriod::periodEnd() : Carbon::parse($endDate);
-        $startDate = ReportingPeriod::periodStart($endDate);
+        $startDate = Carbon::parse('2013-01-01'); //ReportingPeriod::periodStart($endDate);
+
         $year = ReportingPeriod::year($endDate);
 
         return $this->openingBalance($year) + $this->currentBalance($startDate, $endDate);
