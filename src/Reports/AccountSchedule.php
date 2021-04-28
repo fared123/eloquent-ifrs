@@ -48,7 +48,7 @@ class AccountSchedule extends AccountStatement
     {
         $transaction->originalAmount = $transaction->amount;
         $transaction->clearedAmount = $transaction->cleared_amount;
-        $unclearedAmount = floatval($transaction->originalAmount) - floatval($transaction->clearedAmount);
+        $unclearedAmount = $transaction->originalAmount - $transaction->clearedAmount;
         
         if (bccomp($transaction->originalAmount, $transaction->clearedAmount, 2) == 1) {
 
