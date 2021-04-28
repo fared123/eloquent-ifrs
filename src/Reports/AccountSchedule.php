@@ -48,7 +48,7 @@ class AccountSchedule extends AccountStatement
     {
         $transaction->originalAmount = $transaction->amount;
         $transaction->clearedAmount = $transaction->cleared_amount;
-        $unclearedAmount = $transaction->originalAmount - $transaction->clearedAmount;
+        $unclearedAmount = ((int)$transaction->originalAmount) - ((int)$transaction->clearedAmount);
         
         if (bccomp($transaction->originalAmount, $transaction->clearedAmount, 2) == 1) {
 
@@ -68,7 +68,7 @@ class AccountSchedule extends AccountStatement
             $this->balances['unclearedAmount'] += $unclearedAmount;
             $this->balances['totalAge'] += $transaction->age;
 
-            $transaction->unclearedAmount = $unclearedAmount;
+            $transaction->unclearedAmount = (int)$unclearedAmount;
 
             array_push($this->transactions, $transaction);
         }
