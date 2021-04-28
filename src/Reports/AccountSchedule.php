@@ -50,7 +50,7 @@ class AccountSchedule extends AccountStatement
         $transaction->clearedAmount = $transaction->cleared_amount;
         $unclearedAmount = floatval($transaction->originalAmount) - floatval($transaction->clearedAmount);
         
-        if (bccomp("$unclearedAmount", "0", 2) == 1) {
+        if (bccomp((string)$unclearedAmount, "0", 2) == 1) {
 
             if ($transaction instanceof Balance) {
                 $transaction->transactionType = Transaction::getType($transaction->transaction_type);
