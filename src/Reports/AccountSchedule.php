@@ -48,8 +48,8 @@ class AccountSchedule extends AccountStatement
     {
         $transaction->originalAmount = $transaction->amount;
         $transaction->clearedAmount = $transaction->cleared_amount;
-        $unclearedAmount = 0; //floatval($transaction->originalAmount) - floatval($transaction->clearedAmount);
-
+        $unclearedAmount = floatval($transaction->originalAmount) - floatval($transaction->clearedAmount);
+        dd($unclearedAmount, $transaction->originalAmount, $transaction->clearedAmount);
         if ($unclearedAmount > 0) {
 
             if ($transaction instanceof Balance) {
