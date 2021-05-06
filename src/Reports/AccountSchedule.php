@@ -46,8 +46,8 @@ class AccountSchedule extends AccountStatement
      */
     private function getAmounts($transaction): void
     {
-        $transaction->originalAmount = $transaction->amount;
-        $transaction->clearedAmount = $transaction->cleared_amount;
+        $transaction->originalAmount = ($transaction->amount ?? 0);
+        $transaction->clearedAmount = ($transaction->cleared_amount ?? 0);
         $unclearedAmount = round($transaction->originalAmount - $transaction->clearedAmount, 2);
         
         if (bccomp($transaction->originalAmount, $transaction->clearedAmount, 2) == 1) {
