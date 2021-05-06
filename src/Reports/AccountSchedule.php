@@ -47,7 +47,7 @@ class AccountSchedule extends AccountStatement
      */
     private function getAmounts($transaction): void
     {
-        $transaction->originalAmount = ($transaction->amount ?? 0);
+        $transaction->originalAmount = round(($transaction->amount ?? 0), 2);
         $transaction->clearedAmount = ($transaction->cleared_amount ?? 0);
         $unclearedAmount = round($transaction->originalAmount - $transaction->clearedAmount, 2);
         Log::info($transaction->originalAmount.' | '.$transaction->clearedAmount);
