@@ -50,7 +50,7 @@ class AccountSchedule extends AccountStatement
         $transaction->originalAmount = round(($transaction->amount ?? 0), 2);
         $transaction->clearedAmount = ($transaction->cleared_amount ?? 0);
         $unclearedAmount = round($transaction->originalAmount - $transaction->clearedAmount, 2);
-        Log::info($transaction->originalAmount.' | '.$transaction->clearedAmount);
+        //Log::info($transaction->originalAmount.' | '.$transaction->clearedAmount);
         if (bccomp($transaction->originalAmount, $transaction->clearedAmount, 2) == 1) {
 
             if ($transaction instanceof Balance) {
