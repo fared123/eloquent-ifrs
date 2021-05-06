@@ -11,6 +11,7 @@
 namespace IFRS\Reports;
 
 use Carbon\Carbon;
+use Log;
 
 use IFRS\Models\Balance;
 use IFRS\Models\Account;
@@ -49,7 +50,7 @@ class AccountSchedule extends AccountStatement
         $transaction->originalAmount = ($transaction->amount ?? 0);
         $transaction->clearedAmount = ($transaction->cleared_amount ?? 0);
         $unclearedAmount = round($transaction->originalAmount - $transaction->clearedAmount, 2);
-        
+        Log::info($transaction->originalAmount.' | '.$transaction->clearedAmount);
         if (bccomp($transaction->originalAmount, $transaction->clearedAmount, 2) == 1) {
 
             if ($transaction instanceof Balance) {
