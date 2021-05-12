@@ -295,9 +295,11 @@ class Balance extends Model implements Recyclable, Clearable, Segregatable
 
         $entity = Auth::user()->entity;
 
+        /*
         if (ReportingPeriod::periodStart()->lt($this->transaction_date) && !$entity->mid_year_balances) {
             throw new InvalidBalanceDate();
         }
+        */
 
         return parent::save();
     }
