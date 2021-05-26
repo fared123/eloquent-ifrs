@@ -64,8 +64,8 @@ class Ledger extends Model implements Segregatable
      */
     private static function postVat(LineItem $lineItem, Transaction $transaction): void
     {
-        if(strpos('PORA: ', $lineItem->narration)){
-            $amount = floatval(str_replace('PORA: ', '', $lineItem->narration));
+        if($lineItem->sku == '-PORA-'){
+            $amount = floatval($lineItem->narration);
         }else{
             $amount = $lineItem->vat_inclusive ?  $lineItem->amount - ($lineItem->amount / (1 + ($lineItem->vat->rate / 100))) : $lineItem->amount * $lineItem->vat->rate / 100;
         }
