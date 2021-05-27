@@ -86,7 +86,7 @@ class Ledger extends Model implements Segregatable
         $post->posting_date = $folio->posting_date = $transaction->transaction_date;
         $post->line_item_id = $folio->line_item_id = $lineItem->id;
         $post->vat_id = $folio->vat_id = $lineItem->vat_id;
-        $post->amount = $folio->amount = $amount * $transaction->exchangeRate->rate * $lineItem->quantity;
+        $post->amount = $folio->amount = round($amount * $transaction->exchangeRate->rate * $lineItem->quantity, 2);
 
         // different double entry data
         $post->post_account = $folio->folio_account = $lineItem->vat_inclusive ? $lineItem->account_id : $transaction->account_id;
@@ -126,7 +126,7 @@ class Ledger extends Model implements Segregatable
             $post->posting_date = $folio->posting_date = $transaction->transaction_date;
             $post->line_item_id = $folio->line_item_id = $lineItem->id;
             $post->vat_id = $folio->vat_id = $lineItem->vat_id;
-            $post->amount = $folio->amount = $lineItem->amount * $transaction->exchangeRate->rate * $lineItem->quantity;
+            $post->amount = $folio->amount = round($lineItem->amount * $transaction->exchangeRate->rate * $lineItem->quantity, 2);
 
             // different double entry data
             $post->post_account = $folio->folio_account = $transaction->account_id;
