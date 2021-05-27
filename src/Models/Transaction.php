@@ -399,13 +399,13 @@ class Transaction extends Model implements Segregatable, Recyclable, Clearable, 
                 "post_account",
                 $this->account_id
             ) as $ledger) {
-                $amount += $ledger->amount / $this->exchangeRate->rate;
+                $amount += round($ledger->amount, 2);
             }
         } else {
             foreach ($this->getLineItems() as $lineItem) {
-                $amount += round($lineItem->amount * $lineItem->quantity, 2);
+                $amount += round(($lineItem->amount * $lineItem->quantity), 2);
                 if (!$lineItem->vat_inclusive) {
-                    $amount += round($lineItem->amount * ($lineItem->vat->rate / 100) * $lineItem->quantity, 2);
+                    $amount += round(round(($lineItem->amount * ($lineItem->vat->rate / 100)), 2) * $lineItem->quantity, 2);
                 }
             }
         }
