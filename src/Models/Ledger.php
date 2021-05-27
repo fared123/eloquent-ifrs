@@ -67,7 +67,7 @@ class Ledger extends Model implements Segregatable
         if($lineItem->sku == '-PORA-'){
             $amount = floatval($lineItem->narration);
         }else{
-            $amount = $lineItem->vat_inclusive ?  $lineItem->amount - ($lineItem->amount / (1 + ($lineItem->vat->rate / 100))) : $lineItem->amount * $lineItem->vat->rate / 100;
+            $amount = round(($lineItem->vat_inclusive ?  $lineItem->amount - ($lineItem->amount / (1 + ($lineItem->vat->rate / 100))) : $lineItem->amount * $lineItem->vat->rate / 100), 2);
         }
 
         $post = new Ledger();
