@@ -79,7 +79,8 @@ class Assignment extends Model implements Segregatable
         Transaction::PY,
         Transaction::CN,
         Transaction::DN,
-        Transaction::JN
+        Transaction::JN,
+        Transaction::IN,
     ];
 
     /**
