@@ -81,6 +81,7 @@ class Assignment extends Model implements Segregatable
         Transaction::DN,
         Transaction::JN,
         Transaction::IN,
+        Transaction::BL,
     ];
 
     /**
