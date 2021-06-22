@@ -42,10 +42,12 @@ class CreateIfrsTransactionsTable extends Migration
             $table->enum('transaction_type', [
                 Transaction::CS,
                 Transaction::IN,
+                Transaction::IC,
                 Transaction::CN,
                 Transaction::RC,
                 Transaction::CP,
                 Transaction::BL,
+                Transaction::BC,
                 Transaction::DN,
                 Transaction::PY,
                 Transaction::CE,

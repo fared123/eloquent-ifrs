@@ -82,10 +82,12 @@ class Transaction extends Model implements Segregatable, Recyclable, Clearable, 
 
     const CS = 'CS';
     const IN = 'IN';
+    const IC = 'IC';
     const CN = 'CN';
     const RC = 'RC';
     const CP = 'CP';
     const BL = 'BL';
+    const BC = 'BC';
     const DN = 'DN';
     const PY = 'PY';
     const CE = 'CE';
@@ -207,10 +209,12 @@ class Transaction extends Model implements Segregatable, Recyclable, Clearable, 
         return [
             'CS' => 'CashSale',
             'IN' => 'ClientInvoice',
+            'IC' => 'ClientInvoiceCredit',
             'CN' => 'CreditNote',
             'RC' => 'ClientReceipt',
             'CP' => 'CashPurchase',
             'BL' => 'SupplierBill',
+            'BC' => 'SupplierBillCredit',
             'DN' => 'DebitNote',
             'PY' => 'SupplierPayment',
             'CE' => 'ContraEntry',

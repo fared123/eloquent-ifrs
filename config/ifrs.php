@@ -223,12 +223,14 @@ return [
         // Client Transactions
         Transaction::CS => 'Cash Sale',
         Transaction::IN => 'Client Invoice',
+        Transaction::IC => 'Credit Invoice',
         Transaction::CN => 'Credit Note',
         Transaction::RC => 'Client Receipt',
 
         //Supplier Transactions
         Transaction::CP => 'Cash Purchase',
         Transaction::BL => 'Supplier Bill',
+        Transaction::BC => 'Credit Bill',
         Transaction::DN => 'Debit Note',
         Transaction::PY => 'Supplier Payment',
 
