@@ -113,7 +113,7 @@ class AccountStatement
         if (is_null($accountId)) {
             throw new MissingAccount("Account Statement");
         } else {
-            $this->account = Account::find($accountId);
+            $this->account = Account::with('balances')->find($accountId);
         }
 
         $this->entity = Auth::user()->entity;
