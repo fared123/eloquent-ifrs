@@ -179,11 +179,11 @@ class Assignment extends Model implements Segregatable
             throw new InvalidClearanceEntry();
         }
 
-        if (bccomp($this->transaction->balance, $this->amount) == -1) {
+        if (bccomp(strval($this->transaction->balance), strval($this->amount)) == -1) {
             throw new InsufficientBalance($transactionType, $this->transaction->balance. '|' .$this->amount, $clearedType);
         }
 
-        if (bccomp($this->cleared->amount - $this->cleared->cleared_amount, $this->amount) == -1) {
+        if (bccomp(strval($this->cleared->amount - $this->cleared->cleared_amount), strval($this->amount)) == -1) {
             throw new OverClearance($clearedType, $this->amount);
         }
 
