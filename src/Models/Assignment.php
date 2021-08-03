@@ -11,7 +11,7 @@
 namespace IFRS\Models;
 
 use Carbon\Carbon;
-
+use Log;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -180,6 +180,8 @@ class Assignment extends Model implements Segregatable
         }
 
         if (bccomp(strval($this->transaction->balance), strval($this->amount)) == -1) {
+            Log::info(bccomp(strval($this->transaction->balance), strval($this->amount)));
+            Log::info(strval($this->transaction->balance).' - '.strval($this->amount));
             throw new InsufficientBalance($transactionType, $this->transaction->balance. '|' .$this->amount, $clearedType);
         }
 
