@@ -472,7 +472,8 @@ class Account extends Model implements Recyclable, Segregatable
         ->where('account_type', $this->account_type);
 
         if(!is_null($this->entity_id)){
-            $query->withoutGlobalScopes()->where('entity_id', $this->entity_id);
+            $accountTable = config('ifrs.table_prefix') . 'accounts';
+            $query->withoutGlobalScopes()->where($accountTable.'.entity_id', $this->entity_id);
         }
         return config('ifrs')['account_codes'][$this->account_type] + $query->count() + 1;
     }
