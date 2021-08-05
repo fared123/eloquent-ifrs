@@ -657,7 +657,7 @@ class Transaction extends Model implements Segregatable, Recyclable, Clearable, 
     }
 
     public function client(){
-        return $this->belongsTo('App\Models\Client\Client', 'id', 'customer_id');
+        return $this->belongsTo('App\Models\Client\Client', 'customer_id', 'id');
     }
 
 }
