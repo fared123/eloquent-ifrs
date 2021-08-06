@@ -51,7 +51,7 @@ use IFRS\Exceptions\InvalidAccountClassBalance;
  */
 class Balance extends Model implements Recyclable, Clearable, Segregatable
 {
-    protected $connection = 'ifrs_dms';
+    protected $connection = 'datadb';
 
     use Segregating;
     use SoftDeletes;

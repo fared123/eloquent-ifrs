@@ -41,7 +41,7 @@ use IFRS\Exceptions\PostedTransaction;
  */
 class LineItem extends Model implements Recyclable, Segregatable
 {
-    protected $connection = 'ifrs_dms';
+    protected $connection = 'datadb';
 
     use Segregating;
     use SoftDeletes;

@@ -41,7 +41,7 @@ use Illuminate\Support\Facades\Auth;
  */
 class Ledger extends Model implements Segregatable
 {
-    protected $connection = 'ifrs_dms';
+    protected $connection = 'datadb';
 
     use Segregating;
     use SoftDeletes;

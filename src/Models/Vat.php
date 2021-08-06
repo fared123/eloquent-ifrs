@@ -38,7 +38,7 @@ use IFRS\Exceptions\InvalidAccountType;
  */
 class Vat extends Model implements Segregatable, Recyclable
 {
-    protected $connection = 'ifrs_dms';
+    protected $connection = 'datadb';
 
     use Segregating;
     use SoftDeletes;

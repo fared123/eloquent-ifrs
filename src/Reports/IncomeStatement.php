@@ -78,7 +78,7 @@ class IncomeStatement extends FinancialStatement
         $accountTable = config('ifrs.table_prefix') . 'accounts';
         $ledgerTable = config('ifrs.table_prefix') . 'ledgers';
 
-        $baseQuery = DB::connection('ifrs_dms')->table(
+        $baseQuery = DB::connection('datadb')->table(
             $accountTable
         )
             ->leftJoin($ledgerTable, $accountTable . '.id', '=', $ledgerTable . '.post_account')

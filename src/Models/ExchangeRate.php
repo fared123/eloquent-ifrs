@@ -35,7 +35,7 @@ use IFRS\Traits\ModelTablePrefix;
  */
 class ExchangeRate extends Model implements Segregatable, Recyclable
 {
-    protected $connection = 'ifrs_dms';
+    protected $connection = 'datadb';
 
     use Segregating;
     use SoftDeletes;

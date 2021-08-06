@@ -98,7 +98,7 @@ class Account extends Model implements Recyclable, Segregatable
         Account::INVENTORY
     ];
 
-    protected $connection = 'ifrs_dms';
+    protected $connection = 'datadb';
 
     /**
      * The attributes that are mass assignable.
@@ -369,7 +369,7 @@ class Account extends Model implements Recyclable, Segregatable
         $transactionTable = config('ifrs.table_prefix') . 'transactions';
         $ledgerTable = config('ifrs.table_prefix') . 'ledgers';
 
-        $query = DB::connection('ifrs_dms')->table(
+        $query = DB::connection('datadb')->table(
             $transactionTable
         )
             ->leftJoin($ledgerTable, $transactionTable . '.id', '=', $ledgerTable . '.transaction_id')
