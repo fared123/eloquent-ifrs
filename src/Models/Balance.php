@@ -106,7 +106,7 @@ class Balance extends Model implements Recyclable, Clearable, Segregatable
             }
 
             if (!isset($attributes['transaction_no']) && isset($attributes['currency_id']) && isset($attributes['account_id'])) {
-                $currency = Currency::find($attributes['currency_id'])->currency_code;
+                $currency = 'GBP'; // Currency::find($attributes['currency_id'])->currency_code;
                 $attributes['transaction_no'] = $attributes['account_id'] . $currency . $reportingPeriod->calendar_year;
             }
         }

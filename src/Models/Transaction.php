@@ -114,7 +114,7 @@ class Transaction extends Model implements Segregatable, Recyclable, Clearable, 
         }
 
         if (!isset($attributes['exchange_rate_id']) && !is_null($entity)) {
-            $attributes['exchange_rate_id'] = $entity->default_rate->id;
+            $attributes['exchange_rate_id'] = 1; //$entity->default_rate->id;
         }
         $attributes['transaction_date'] = !isset($attributes['transaction_date']) ? Carbon::now() : Carbon::parse($attributes['transaction_date']);
         $attributes['user_id'] = Auth::id();
@@ -403,7 +403,7 @@ class Transaction extends Model implements Segregatable, Recyclable, Clearable, 
                 "post_account",
                 $this->account_id
             ) as $ledger) {
-                $amount += $ledger->amount / $this->exchangeRate->rate;
+                $amount += $ledger->amount; //  / $this->exchangeRate->rate;
             }
         } else {
             foreach ($this->getLineItems() as $lineItem) {

@@ -143,8 +143,8 @@ class Assignment extends Model implements Segregatable
         $transactionType = $this->transaction->transaction_type;
         $clearedType = $this->cleared->transaction_type;
 
-        $transactionRate = $this->transaction->exchangeRate->rate;
-        $clearedRate = $this->cleared->exchangeRate->rate;
+        $transactionRate = 1; // $this->transaction->exchangeRate->rate;
+        $clearedRate = 1; // $this->cleared->exchangeRate->rate;
 
         if (!in_array($transactionType, Assignment::ASSIGNABLES)) {
             throw new UnassignableTransaction($transactionType, Assignment::ASSIGNABLES);
